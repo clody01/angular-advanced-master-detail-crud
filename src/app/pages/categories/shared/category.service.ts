@@ -42,6 +42,7 @@ export class CategoryService {
       map(() => category)
     );
   }
+
   delete(id: number): Observable<any> {
     const url = `${this.apiPath}/${id}`;
     return this.http.delete(url).pipe(
@@ -49,15 +50,18 @@ export class CategoryService {
       map(() => null)
     );
   }
+
   // PRIVATE METHODS
   private jsonDataToCategories(jsonData: any[]): Category[] {
     const categories: Category[] = [];
     jsonData.forEach(element => categories.push(element as Category));
     return categories;
   }
+
   private jsonDataToCategory(jsonData: any): Category {
     return jsonData as Category;
   }
+
   private handleError(error: any): Observable<any> {
     console.log('Request error ->', error);
     return throwError(error);
