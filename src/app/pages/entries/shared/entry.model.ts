@@ -1,6 +1,11 @@
 import {Category} from '../../categories/shared/category.model';
 
-export class  Entry {
+export class Entry {
+  static types = {
+    expense: 'expense',
+    revenue: 'revenue'
+  };
+
   public id?: number;
   public name?: string;
   public description?: string;
@@ -10,12 +15,9 @@ export class  Entry {
   public paid?: boolean;
   public categoryId?: number;
   public category?: Category;
-static types = {
-  expense: 'expense',
-  revenue: 'revenue'
-};
-get paidText(): string {
-  return this.paid ? 'Paid out' : 'Pending';
-}
+
+  get paidText(): string {
+    return this.paid ? 'Paid out' : 'Pending';
+  }
 
 }

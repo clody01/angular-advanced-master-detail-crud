@@ -16,7 +16,7 @@ export class CategoryListComponent implements OnInit {
   ngOnInit() {
     this.categoryService.getAll().subscribe(
       categories => this.categories = categories,
-      error1 => alert('Error when opening a list'));
+      error => alert('Error when opening a list'));
   }
 
   deleteCategory(category) {
