@@ -3,9 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import {CategoryListComponent} from '../categories/category-list/category-list.component';
 import {CategoryFormComponent} from '../categories/category-form/category-form.component';
 import {EntryListComponent} from './entry-list/entry-list.component';
+import {EntryFormComponent} from './entry-form/entry-form.component';
 
 const routes: Routes = [
-  {path: '', component: EntryListComponent}
+  {path: '', component: EntryListComponent},
+  {path: 'new', component: EntryFormComponent},
+  {path: ':id/edit', component: EntryFormComponent}
 ];
 
 @NgModule({

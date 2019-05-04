@@ -10,8 +10,7 @@ import {Entry} from '../shared/entry.model';
 export class EntryListComponent implements OnInit {
   entries: Entry[] = [];
 
-  constructor(private entryService: EntryService) {
-  }
+  constructor(private entryService: EntryService) {}
 
   ngOnInit() {
     this.entryService.getAll().subscribe(
