@@ -5,6 +5,8 @@ import {switchMap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 import {Entry} from '../shared/entry.model';
 import {EntryService} from '../shared/entry.service';
+import {Category} from '../../categories/shared/category.model';
+import {CategoryService} from '../../categories/shared/category.service';
 
 
 @Component({
@@ -19,13 +21,23 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   serverErrorMessages: string[] = null;
   submittingForm: boolean = false;
   entry: Entry = new Entry();
+  categories: Array<Category>;
+  imaskConfig = {
+    mask: Number,
+    scale: 2,
+    thousandsSeparator: '',
+    padFractionalZeros: true,
+    normalizeZeros: true,
+    radix: ','
+  };
 
   constructor(
     private entryService: EntryService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private categoryService: CategoryService
   ) {
   }
 
@@ -33,6 +45,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     this.setCurrentAction();
     this.buildEntryForm();
     this.loadEntry();
+    this.loadCategories();
   }
 
   ngAfterContentChecked(): void {
@@ -46,6 +59,17 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     } else {
       this.updateEntry();
     }
+  }
+
+  get typeOptions(): Array<any> {
+    return Object.entries(Entry.types).map(
+      ([value, text]) => {
+        return {
+          text: text,
+          value: value
+        };
+      }
+    );
   }
 
   // PRIVATE METHODS
@@ -64,10 +88,10 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
       id: [null],
       name: [null, [Validators.required, Validators.minLength(2)]],
       description: [null],
-      type: [null, [Validators.required]],
+      type: ['expense', [Validators.required]],
       amount: [null, [Validators.required]],
       date: [null, [Validators.required]],
-      paid: [null],
+      paid: [true, [Validators.required]],
       categoryId: [null],
     });
   }
@@ -129,5 +153,10 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     this.router.navigate(['entries'], {skipLocationChange: true}).then(
       () => this.router.navigate(['entries', ntry.id, 'edit'])
     );
+  }
+
+  private loadCategories() {
+    this.categoryService.getAll().subscribe(
+      categories => this.categories = categories);
   }
 }
