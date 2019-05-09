@@ -17,7 +17,7 @@
     </a>
   </div>
 </div>
-<form [formGroup]="entryForm" (submit)="submitForm()">
+<form [formGroup]="resourceForm" (submit)="submitForm()">
   <div class="card">
     <div class="card-header">
       Entry's Information
@@ -32,17 +32,17 @@
             <option *ngFor="let option of typeOptions" [value]="option.value">{{option.text}}</option>
           </select>
 
-          <div class="text-danger" *ngIf="entryForm.get('type').invalid && entryForm.get('type').touched">
-            <div *ngIf="entryForm.get('type').errors.required">Type is Required!</div>
+          <div class="text-danger" *ngIf="resourceForm.get('type').invalid && resourceForm.get('type').touched">
+            <div *ngIf="resourceForm.get('type').errors.required">Type is Required!</div>
           </div>
         </div>
         <!--Name-->
         <div class="form-group col-md-5">
           <label for="name">Name</label>
           <input type="text" class="form-control" id="name" formControlName="name">
-          <div class="text-danger" *ngIf="entryForm.get('name').invalid && entryForm.get('name').touched">
-            <div *ngIf="entryForm.get('name').errors.required">Name is Mandatory</div>
-            <div *ngIf="entryForm.get('name').errors.minlength">Name must have at least 2 caracteres</div>
+          <div class="text-danger" *ngIf="resourceForm.get('name').invalid && resourceForm.get('name').touched">
+            <div *ngIf="resourceForm.get('name').errors.required">Name is Mandatory</div>
+            <div *ngIf="resourceForm.get('name').errors.minlength">Name must have at least 2 caracteres</div>
           </div>
         </div>
         <!--Amount-->
@@ -56,8 +56,8 @@
                    formControlName="amount">
           </div>
 
-          <div class="text-danger" *ngIf="entryForm.get('amount').invalid && entryForm.get('amount').touched">
-            <div *ngIf="entryForm.get('amount').errors.required">Value is Mandatory</div>
+          <div class="text-danger" *ngIf="resourceForm.get('amount').invalid && resourceForm.get('amount').touched">
+            <div *ngIf="resourceForm.get('amount').errors.required">Value is Mandatory</div>
           </div>
         </div>
         <!--Date-->
@@ -71,8 +71,8 @@
             dateFormat="dd/mm/yy"
             [showButtonBar]="true">
           </p-calendar>
-          <div class="text-danger" *ngIf="entryForm.get('date').invalid && entryForm.get('date').touched">
-            <div *ngIf="entryForm.get('date').errors.required">Date is Mandatory</div>
+          <div class="text-danger" *ngIf="resourceForm.get('date').invalid && resourceForm.get('date').touched">
+            <div *ngIf="resourceForm.get('date').errors.required">Date is Mandatory</div>
           </div>
         </div>
       </div>
@@ -81,16 +81,16 @@
         <div class="form-group col-md-2">
           <label for="paid">Paid</label>
           <div class="btn-group">
-            <label (click)="entryForm.get('paid').setValue(true)" [class.active]="entryForm.get('paid').value == true" class="btn btn-outline-info">
+            <label (click)="resourceForm.get('paid').setValue(true)" [class.active]="resourceForm.get('paid').value == true" class="btn btn-outline-info">
               Paid out
             </label>
-            <label (click)="entryForm.get('paid').setValue(false)" [class.active]="entryForm.get('paid').value == false" class="btn btn-outline-info">
+            <label (click)="resourceForm.get('paid').setValue(false)" [class.active]="resourceForm.get('paid').value == false" class="btn btn-outline-info">
               Pending
             </label>
           </div>
 
-          <div class="text-danger" *ngIf="entryForm.get('paid').invalid && entryForm.get('paid').touched">
-            <div *ngIf="entryForm.get('paid').errors.required">paid is Mandatory</div>
+          <div class="text-danger" *ngIf="resourceForm.get('paid').invalid && resourceForm.get('paid').touched">
+            <div *ngIf="resourceForm.get('paid').errors.required">paid is Mandatory</div>
           </div>
         </div>
         <!--CategoryId-->
@@ -100,8 +100,8 @@
             <option *ngFor="let category of  categories" [value]="category.id">{{category.name}}</option>
           </select>
 
-          <div class="text-danger" *ngIf="entryForm.get('categoryId').invalid && entryForm.get('categoryId').touched">
-            <div *ngIf="entryForm.get('categoryId').errors.required">Type is Required!</div>
+          <div class="text-danger" *ngIf="resourceForm.get('categoryId').invalid && resourceForm.get('categoryId').touched">
+            <div *ngIf="resourceForm.get('categoryId').errors.required">Type is Required!</div>
           </div>
         </div>
         <!--Description-->
@@ -118,9 +118,9 @@
       <li *ngFor="let error of serverErrorMessages">{{error}}</li>
     </ul>
   </div>
-  <button [disabled]="submittingForm || entryForm.invalid" class="btn btn-primary btn-lg float-right mt-3"
+  <button [disabled]="submittingForm || resourceForm.invalid" class="btn btn-primary btn-lg float-right mt-3"
           type="submit">
     Submit
   </button>
 </form>
-<pre>{{entryForm.value | json}}</pre>
+<pre>{{resourceForm.value | json}}</pre>
