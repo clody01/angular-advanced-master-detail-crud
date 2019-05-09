@@ -7,6 +7,10 @@ export class Category extends BaseResourceModel{
   constructor () {
     super();
   }
+  static fromJson(jsonData: any): Category {
+    return Object.assign(new Category(), jsonData);
+  }
+
   /*constructor (
     public id: number,
     public name: string,
