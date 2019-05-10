@@ -16,7 +16,7 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
   }
 
   deleteResource(resource: T) {
-    const mustDelete = confirm('Do you want to delete this entry ?');
+    const mustDelete = confirm('Do you want to delete this item ?');
     if (mustDelete) {
       this.resourceService.delete(resource.id).subscribe(
         () => this.resources = this.resources.filter(element => element.id != resource.id),
