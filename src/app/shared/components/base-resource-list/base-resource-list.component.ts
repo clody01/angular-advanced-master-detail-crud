@@ -24,5 +24,4 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
     }
   }
 
-//  map(clients => clients.map(clt => clt.id == updatedClient.id ? updatedClient : clt)));
 }
